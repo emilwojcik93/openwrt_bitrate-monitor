@@ -55,7 +55,7 @@ output_script=$(cat << END
 (while true
 do
   "rx=\$(iw $iface link | grep bitrate | awk '{print \$3}' | awk -F. '{print \$1}' | awk 'NR==1')"
-  if [ "\$rx" -lt "$(expr $min_bitrate + 100)" ]; then
+  if [ "\$rx" -lt "$(expr $min_bitrate + 50)" ]; then
     $output
   fi
   sleep 5
