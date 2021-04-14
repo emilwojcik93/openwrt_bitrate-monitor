@@ -5,7 +5,7 @@ output_forward="$2"
 
 net="lan"
 output=$(echo "ifdown "$net" && sleep 5 && ifup "$net"")
-time=1
+time=601
 rx=$(iw $iface link | grep bitrate | awk '{print $3}' | awk -F. '{print $1}' | awk 'NR==1')
 tx=$(iw $iface link | grep bitrate | awk '{print $3}' | awk -F. '{print $1}' | awk 'NR==2')
 
