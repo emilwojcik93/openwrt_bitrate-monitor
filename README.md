@@ -6,7 +6,7 @@ Clone it in current directory and then proceed installation:
 ```
 # git clone git://github.com/emilwojcik93/openwrt_bitrate-monitor.git
 # cd openwrt_bitrate-monitor
-# chmod 755 "/tmp/bitrate_check.sh" && ./bitrate_check.sh  wlan1 auto
+# chmod 755 "./bitrate_check.sh" && ./bitrate_check.sh  wlan1 auto
 ```
 
 ## Install using `curl` or `wget`:  
