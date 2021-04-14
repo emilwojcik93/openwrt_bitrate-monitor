@@ -4,9 +4,9 @@ This script is used to monitor bitrate of choosen iface (useful for WDS connecti
 ## Install using `git`: 
 Clone it in current directory and then proceed installation:
 ```
-# git clone git://github.com/emilwojcik93/openwrt_bitrate-monitor.git
-# cd openwrt_bitrate-monitor
-# chmod 755 "./bitrate_check.sh" && ./bitrate_check.sh wlan1 auto
+git clone git://github.com/emilwojcik93/openwrt_bitrate-monitor.git
+cd openwrt_bitrate-monitor
+chmod 755 "./bitrate_check.sh" && ./bitrate_check.sh wlan1 auto
 ```
 
 ## Install using `curl` or `wget`: 
