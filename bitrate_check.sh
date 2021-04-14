@@ -58,7 +58,7 @@ do
   if [ "\$rx" -lt "$(expr $min_bitrate - 100)" ]; then
     $output
   fi
-  sleep 5
+  sleep 30
 done) &
 END
 )
