@@ -28,9 +28,9 @@ And this may be a workaround if you still have problems:
 mkdir -p -m0755 /etc/ssl/certs && curl -k -o /etc/ssl/certs/ca-certificates.crt -L http://curl.haxx.se/ca/cacert.pem
 ```
 Relevant links:
- - https://wiki.openwrt.org/doc/howto/wget-ssl-certs{:target="_blank" rel="noopener"}
- - https://forum.openwrt.org/viewtopic.php?pid=284368#p284368{:target="_blank" rel="noopener"}
- - https://dev.openwrt.org/ticket/19621{:target="_blank" rel="noopener"}
+ - [OpenWRT Wiki](https://wiki.openwrt.org/doc/howto/wget-ssl-certs){:target="_blank" rel="noopener"}
+ - [OpenWRT Forum](https://forum.openwrt.org/viewtopic.php?pid=284368#p284368){:target="_blank" rel="noopener"}
+ - [OpenWRT Development](https://dev.openwrt.org/ticket/19621){:target="_blank" rel="noopener"}
 
 ### Oneliners to run from internet ( downloads to `/tmp` ) :
 ```bash
