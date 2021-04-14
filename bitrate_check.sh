@@ -54,7 +54,7 @@ min_bitrate=$(sort -n /root/temp.out | head -1)
 output_script=$(cat << END
 (while true
 do
-  "rx=\$(iw $iface link | grep bitrate | awk '{print $3}' | awk -F. '{print $1}' | awk 'NR==1')"
+  "rx=\$(iw $iface link | grep bitrate | awk '{print \$3}' | awk -F. '{print \$1}' | awk 'NR==1')"
   if [ "\$rx" -lt "$min_bitrate" ]; then
     $output
   fi
