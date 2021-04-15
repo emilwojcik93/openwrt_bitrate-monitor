@@ -32,7 +32,7 @@ if [ "$time" != 600 ] > /dev/null 2>&1; then
   if [ expr -- "$time" + 0 ] > /dev/null 2>&1; then
     echo "$time is a number" > /dev/null 2>&1
   else
-    echo -e "Please declare corret value as second argument\nwhile executing script eg.:\n\n./bitrate_check.sh wlan1 auto\nsh bitrate_check.sh wlan0 manual\n"
+    echo -e "Please declare corret value as third argument\nwhile executing script.\nThis value must be integer eg.:\n\n./bitrate_check.sh wlan1 auto 60\nsh bitrate_check.sh wlan0 manual 300\n"
   fi
 fi
 
