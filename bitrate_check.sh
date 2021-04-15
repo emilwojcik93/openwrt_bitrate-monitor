@@ -28,18 +28,25 @@ if [ -z "$time" ]; then
   time=600
 fi
 
-if [ "$time" != 600 ] > /dev/null 2>&1; then
-  if [ expr -- "$time" + 0 ] > /dev/null 2>&1; then
-    echo "$time is a number" > /dev/null 2>&1
+if [ "$time" -le 0 ] > /dev/null 2>&1; then
+  echo -e "Please declare correct value as third argument\nwhile executing script.\nThis value must be integer larger than 0 eg.:\n\n./bitrate_check.sh wlan1 auto 60\nsh bitrate_check.sh wlan0 manual 300\n"
+  exit 0
+else
+  if [ "$time" -eq "$time" ] 2>/dev/null; then
+    echo -e "Script will be probing bitrate for: "$time
   else
     echo -e "Please declare corret value as third argument\nwhile executing script.\nThis value must be integer eg.:\n\n./bitrate_check.sh wlan1 auto 60\nsh bitrate_check.sh wlan0 manual 300\n"
+    exit 0
   fi
 fi
 
 if [ ! -f /tmp/bitrate.out ]; then
+  echo -e "Creating temp file..."
   touch /tmp/bitrate.out
 else
+  echo -e "Removeing old temp file..."
   rm -r /tmp/bitrate.out
+  echo -e "Creating temp file..."
   touch /tmp/bitrate.out
 fi
 
@@ -78,11 +85,17 @@ END
 )
 
 if [ "$output_forward" = "auto" ]; then
-  sed -i '/exit 0/d' /etc/rc.local
-  echo -e "$output_script\n\nexit 0" | tee -a /etc/rc.local  > /dev/null 2>&1
-  echo -e "script appended to /etc/rc.local\n\n"
-  sleep 2
-  cat /etc/rc.local
+  if grep -q "grep bitrate" /etc/rc.local; then
+    echo -e "\nThis script is already exist in file: /etc/rc.local\nPlease edit it manually by removing old script and adding new one which looks like this:\n\n$output_script\n\n"
+    rm -f /tmp/bitrate.out
+    exit 0
+  else
+    sed -i '/exit 0/d' /etc/rc.local
+    echo -e "$output_script\n\nexit 0" | tee -a /etc/rc.local  > /dev/null 2>&1
+    echo -e "script appended to /etc/rc.local\n\n"
+    sleep 2
+    cat /etc/rc.local
+  fi
 fi
 
 
