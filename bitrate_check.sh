@@ -2,7 +2,7 @@
 
 iface="$1"
 output_forward="$2"
-time=$3
+time="$3"
 
 net="lan"
 output=$(echo "ifdown "$net" && sleep 5 && ifup "$net"")
@@ -30,7 +30,7 @@ fi
 
 if [ "$time" != 600 ] > /dev/null 2>&1; then
   if [ expr -- "$time" + 0 ] > /dev/null 2>&1; then
-    echo "$time is a number"
+    echo "$time is a number" > /dev/null 2>&1
   else
     echo -e "Please declare corret value as second argument\nwhile executing script eg.:\n\n./bitrate_check.sh wlan1 auto\nsh bitrate_check.sh wlan0 manual\n"
   fi
