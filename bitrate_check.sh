@@ -29,18 +29,18 @@ if [ -z "$time" ]; then
 fi
 
 if [ "$time" != 600 ] > /dev/null 2>&1; then
-if [ expr -- "$time" + 0 ] > /dev/null 2>&1; then
+  if [ expr -- "$time" + 0 ] > /dev/null 2>&1; then
     echo "$time is a number"
-else
+  else
     echo -e "Please declare corret value as second argument\nwhile executing script eg.:\n\n./bitrate_check.sh wlan1 auto\nsh bitrate_check.sh wlan0 manual\n"
-fi
   fi
 fi
 
-if [ ! -f /root/temp.out ]; then
+if [ ! -f /tmp/bitrate.out ]; then
   touch /tmp/bitrate.out
 else
   rm -r /tmp/bitrate.out
+  touch /tmp/bitrate.out
 fi
 
 
@@ -51,8 +51,8 @@ do
   counter=$(expr "$counter0" % 60)
   counter1=$(expr "$time" - "$c")
   left=$(expr "$counter1" / 60)
-  echo "$rx" | tee -a /root/temp.out > /dev/null 2>&1
-  echo "$tx" | tee -a /root/temp.out > /dev/null 2>&1
+  echo "$rx" | tee -a /tmp/bitrate.out > /dev/null 2>&1
+  echo "$tx" | tee -a /tmp/bitrate.out > /dev/null 2>&1
   let c=c+1
   if [ "$counter" -eq 0 ]; then
     echo Left: "$left" minutes
@@ -103,6 +103,6 @@ echo "$output_manual"
 echo "$output_script"
 fi
 
-rm -r /root/temp.out
+rm -r /tmp/bitrate.out
 
 exit 0
