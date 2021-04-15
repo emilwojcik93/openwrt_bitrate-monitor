@@ -2,10 +2,10 @@
 
 iface="$1"
 output_forward="$2"
+time=$3
 
 net="lan"
 output=$(echo "ifdown "$net" && sleep 5 && ifup "$net"")
-time=601
 rx=$(iw $iface link | grep bitrate | awk '{print $3}' | awk -F. '{print $1}' | awk 'NR==1')
 tx=$(iw $iface link | grep bitrate | awk '{print $3}' | awk -F. '{print $1}' | awk 'NR==2')
 
@@ -24,8 +24,23 @@ if [ "$output_forward" != "auto" ]; then
   fi
 fi
 
-if [ -f /root/temp.out ]; then
-  touch /root/temp.out
+if [ -z "$time" ]; then
+  time=600
+fi
+
+if [ "$time" != 600 ] > /dev/null 2>&1; then
+if [ expr -- "$time" + 0 ] > /dev/null 2>&1; then
+    echo "$time is a number"
+else
+    echo -e "Please declare corret value as second argument\nwhile executing script eg.:\n\n./bitrate_check.sh wlan1 auto\nsh bitrate_check.sh wlan0 manual\n"
+fi
+  fi
+fi
+
+if [ ! -f /root/temp.out ]; then
+  touch /tmp/bitrate.out
+else
+  rm -r /tmp/bitrate.out
 fi
 
 
@@ -45,11 +60,10 @@ do
   sleep 1
 done
 
-echo -e "Minimum value of bitrate is: "$(sort -n /root/temp.out | head -1)
+min_bitrate=$(sort -n /tmp/bitrate.out | head -1)
+
+echo -e "Minimum value of bitrate is: "$min_bitrate
 sleep 2
-
-min_bitrate=$(sort -n /root/temp.out | head -1)
-
 
 output_script=$(cat << END
 (while true
