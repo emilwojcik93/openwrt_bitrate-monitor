@@ -33,7 +33,7 @@ if [ "$time" -le 0 ] > /dev/null 2>&1; then
   exit 0
 else
   if [ "$time" -eq "$time" ] 2>/dev/null; then
-    echo -e "Script will be probing bitrate for: "$time
+    echo -e "Script will be probing bitrate for: $time seconds"
   else
     echo -e "Please declare corret value as third argument\nwhile executing script.\nThis value must be integer eg.:\n\n./bitrate_check.sh wlan1 auto 60\nsh bitrate_check.sh wlan0 manual 300\n"
     exit 0
