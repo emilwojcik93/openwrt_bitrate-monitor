@@ -50,7 +50,7 @@ else
   touch /tmp/bitrate.out
 fi
 
-
+echo -e "Probing bitrate..."
 c=1
 while [[ $c -le $time ]]
 do
